@@ -69,15 +69,19 @@ if (i > a && i < c) {
 `%`는 나누기에 동그라미가 붙어서 나머지 값을, `/`는 수학 그대로 나누기의 몫을 구한다고 생각하자. 라고 멋대로 정했었다.
 
 
-#### 비트 연산자
+### 비트 연산자
 
 `&&` 논리 곱 또는 `||` 논리 합 연산자는 많이 사용하는 논리 연산자 중 대표적이라 할 수 있겠다.
-하지만 생각해보면 *더블* 말고 *싱글* 논리 연산자는 사용할 일도 많지 않고 잘 모르고 있다는 생각이 들어서 살펴봤다.
+하지만 생각해보면 *싱글* 논리(?) 연산자인 비트 연산자는 사용할 일도 많지 않고 잘 모르고 있기도 하다.
 
-비트 연산시 피연산자에는 반드시 정수가 와야 한다고 설명한 곳도 있는데 문자형에도 포함된다. 그리고 
-실수나 부울린에서 에러를 발생시킨다고 하는 곳도 있는데 부울린형에서도 정상적이었다.
+>비트 연산은 정확한 이해가 없기에 직접 찾아가며 해보시길 권장한다. 
 
-논리식에서 싱글과 더블의 차이라면 
+비트 연산시 피연산자에는 반드시 정수가 와야 한다고 설명한 곳도 있었고, 문자형 그리고 실수나 부울린형에서도 에러를 발생 시킨다고 
+하는 곳도 있는데 부울린형에서도 정상적이었다. 궁금해서 테스트를 해보기는 했지만 구지 비트연산자를 논리 연산자로 사용할 필요는 
+없다고 생각한다. 
+
+또 다른 점으로는 논리 곱, 논리 합 연산으로 싱글 사용시 두가지 조건 이상이 올 때 첫번째 조건에 적합하지 않아도 나머지 조건까지 조회 한다는 것이다.
+
 
 ```java
 public class TestMain {
@@ -93,11 +97,41 @@ public class TestMain {
     public static void main(String[] args) {
         boolean result;
         
-        result = ( retFalse() && retTrue() );
+        // 더블 사용시 첫번째 조건에 적합하지 않다면 두번째 조건식까지 조회하지 않는다.
+        result = ( retFalse() && retTrue() );   // 논리곱 
         System.out.println(result);
         
-        result = ( retFalse() & retTrue() );
+        result = ( retFalse() || retTrue() || retFalse() ); // 논리합 
         System.out.println(result);
+
+        /* 결과 
+        call return false
+        false
+        call return false
+        call return true
+        true
+        */
+        
+        // 싱글 사용시 첫번째 조건에 적합하지 않아도 두번째 (이상) 조건식까지 조회한다.
+        result = ( retFalse() & retTrue() );    // 논리합 
+        System.out.println(result);
+        
+        result = ( retFalse() | retTrue() | retFalse() );   // 논리합 
+        System.out.println(result);
+
+        /* 결과 
+        call return false
+        call return true
+        false
+        call return false
+        call return true
+        call return false
+        true
+        */
     }
 }
 ```
+
+논리 연산에 더욱 싱글을 사용하지 않아야 할 이유가 있다면 연산 소비 비용이 많이 든다.
+
+
