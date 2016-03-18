@@ -1,10 +1,17 @@
-## 자바 입문 공부할 때 아리까리 한 것들
 
-기본기가 부족함을 느끼고 있다. 다시 한 번 차근 차근 복습할겸 정리한다. 
+기본기가 부족함을 느끼고 있다. 다시 한 번 차근 차근 복습도 할겸 알송달송한 부분들을 정리한다.
 
-- [JAVA](https://ko.wikipedia.org/wiki/%EC%9E%90%EB%B0%94_(%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D_%EC%96%B8%EC%96%B4) "자바 프로그래밍언어")
+- [자바 프로그래밍언어(위키)](https://ko.wikipedia.org/wiki/%EC%9E%90%EB%B0%94_(%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D_%EC%96%B8%EC%96%B4) "자바 프로그래밍언어")
 
 >기초적인 부분이지만 모든 부분을 설명하고 있지는 않다. 어디까지나 개인적인 정리임을 감안하고 봐주길.
+
+
+### 변수
+
+변수는 크게 기본과 참조 타입으로 나뉘고 기본형을 제외한 모든 타입을 참조형 타입으로 볼 수 있다.
+그리고 기본형 타입에는 논리(boolean), 문자(char), 정수(byte, short, int, long), 실수(float, double) 형으로 
+나뉘어진다.
+
 
 ### 상수
 
@@ -13,8 +20,8 @@
 - 일반적인 관례로 상수 선언은 *대문자*로 하며 단어와 단어 사이에 언더바`(_)`를 붙인다.
 
 ```java
-    final double PI = 3.14159;
-    final double OLE_PRICE = 1450;
+final double PI = 3.14159;
+final double OLE_PRICE = 1450;
 ```
 
 
@@ -24,18 +31,18 @@
 알고 있지만 잘 사용하지 않게 되는 연산자나 뭐 기타 등등에 해당하는 부분을 알아본다.
 
 ```java
-    int a = 5;
-    int b = 10;
-    int c = 15;
+int a = 5;
+int b = 10;
+int c = 15;
 
-    //1번예시
-    System.out.println( ++a - 5 );
-    1
+//1번예시
+System.out.println( ++a - 5 );
+1
 
-    //2번예시
-    System.out.println( a++ - 5 );
-    0
-    //값 0 이 출력이 되었지만 출력 후 a + 1 를 실행하기 때문에 실제로 메모리에는 6 이라는 값이 저장 된다.
+//2번예시
+System.out.println( a++ - 5 );
+0
+//값 0 이 출력이 되었지만 출력 후 a + 1 를 실행하기 때문에 실제로 메모리에는 6 이라는 값이 저장 된다.
 ```
 
 기본적으로 연산은 왼쪽에서 오른쪽으로 진행된다. 하지만 단항 연산의 경우 반대로 진행된다.
@@ -49,16 +56,16 @@
 예를 들면,
 
 ```java
-    int a = 5;
-    int b = 10;
-    int c = 15;
-    int i = 13;
+int a = 5;
+int b = 10;
+int c = 15;
+int i = 13;
 
-    if (i > a && i < c) {
-        System.out.println(true);
-    } else {
-        System.out.println(false);
-    }
+if (i > a && i < c) {
+    System.out.println(true);
+} else {
+    System.out.println(false);
+}
 ```
 
 위와 같은 논리식이 있을 때 `i` 와 `a, c` 를 비교하는 논리식에서 당연히 왼쪽에서 오른쪽 순으로 `i` 값에 대한 비교인데
@@ -84,63 +91,33 @@
 
 ```java
 
-    static boolean retFalse() {
-        System.out.println("call return false");
-        return false;
-    }
-    static boolean retTrue() {
-        System.out.println("call return true");
-        return true;
-    }
+static boolean retFalse() {
+    System.out.println("call return false");
+    return false;
+}
+static boolean retTrue() {
+    System.out.println("call return true");
+    return true;
+}
+
+public static void main(String[] args) {
+    boolean result;
     
-    public static void main(String[] args) {
-        boolean result;
-        
-        // 더블 사용시 첫번째 조건에 적합하지 않다면 두번째 조건식까지 조회하지 않는다.
-        result = ( retFalse() && retTrue() );   // 논리곱 
-        System.out.println(result);
-        
-        result = ( retFalse() || retTrue() || retFalse() ); // 논리합 
-        System.out.println(result);
+    // 더블 사용시 첫번째 조건에 적합하지 않다면 두번째 조건식까지 조회하지 않는다.
+    result = ( retFalse() && retTrue() );   // 논리곱 
+    System.out.println(result);
+    
+    result = ( retFalse() || retTrue() || retFalse() ); // 논리합 
+    System.out.println(result);
 
-        // 싱글 사용시 첫번째 조건에 적합하지 않아도 두번째 (이상) 조건식까지 조회한다.
-        result = ( retFalse() & retTrue() );    // 논리합 
-        System.out.println(result);
-        
-        result = ( retFalse() | retTrue() | retFalse() );   // 논리합 
-        System.out.println(result);
+    // 싱글 사용시 첫번째 조건에 적합하지 않아도 두번째 (이상) 조건식까지 조회한다.
+    result = ( retFalse() & retTrue() );    // 논리합 
+    System.out.println(result);
+    
+    result = ( retFalse() | retTrue() | retFalse() );   // 논리합 
+    System.out.println(result);
 
-    }
+}
 ```
 
 논리 연산에 더욱 싱글을 사용하지 않아야 할 이유가 있다면 연산 소비 비용이 많이 든다.
-
-
-### 제어문 
-
-switch 문을 종종 사용할 때가 있다. 당연스럽게 `break;` 를 명시하여 제어문 밖으로 빠져 나오도록 사용했는데 
-브레이크 코드를 명시하지 않고 사용하는 방법도 있다. 
-
-
-```java
-    int val = 2;
-    
-    switch(val) {
-        case 1:
-            System.out.println("1");
-            break;
-        case 2:
-            System.out.println("2");
-        case 3:
-            System.out.println("3");    // case 2: 조건에서 break; 를 명시하지 않았기에 출력됨.
-            break;
-        default:
-            System.out.println("default");
-            break;
-    }
-    
-//  java7 이후부터 문자열에도 스위치문이 사용된다.
-```
-
->java 7 버전 이후로는 문자열 또한 스위치문에 적용시킬 수 있다.
-
