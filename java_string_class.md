@@ -86,7 +86,7 @@ if (str.equals(mystr.str)) {
 
 
 
-먼저, `str.equals()` 메소드의 선언을 따라가 보면 스트링 클래스의 오버라이드 된 `equals()`를 보게 된다.
+먼저, `str.equals()` 메소드의 선언을 따라가 보면 오버라이드 된 `java.lang.String.equals()`를 보게 된다.
 살펴보면 다음과 같은데,
 
 ```java
@@ -113,8 +113,20 @@ public boolean equals(Object anObject) {
 }
 ```
 
+최상위 클래스인 오브젝트 클래스 api 의 `equals()`를 살펴보면, 다음과 같은 항목들이 있다.
 
 
+- 이 오브젝트와 다른 오브젝트가 동일한지 어떤지를 나타냅니다.
+
+- equals 메소드는, null 이외의 오브젝트 참조에서의 동치 관계를 실장합니다.
+    - 반사성 (reflexive): null 이외의 참조치 x 에 대해,x.equals(x) 는 true 를 돌려줍니다.
+    - 대칭성 (symmetric): null 이외의 참조치 x 및 y 에 대해,y.equals(x) 가 true 를 돌려주는 경우에 한정해,x.equals(y) 는 true 를 돌려줍니다.
+    - 추이성 (transitive): null 이외의 참조치 x,y, 및 z 에 대해,x.equals(y) 가 true 를 돌려주어,y.equals(z) 가 true 를 돌려주는 경우,x.equals(z) 는 true 를 돌려줍니다.
+    - 일관성 (consistent): null 이외의 참조치 x 및 y 에 대해,x.equals(y) 의 복수의 호출은, 이 오브젝트에 대한 equals 에 의한 비교로 사용된 정보가 변경되어 있지 않으면, 일관해 true 를 돌려주는지, 일관해 false 를 돌려줍니다.
+    - null 이외의 참조치 x 에 대해,x.equals(null) 는 false 를 돌려줍니다.
+- Object 클래스의 equals 메소드는, 가장 비교하기 쉬운 오브젝트의 동치 관계를 실장합니다. 즉, null 이외의 참조치 x 와 y 에 대해, 이 메소드는 x 와 y 가 같은 오브젝트를 참조하는 (x == y 가 true) 경우에만 true 를 돌려줍니다.
+
+- 통상, 이 메소드를 오버라이드(override) 하는 경우는,hashCode 메소드를 항상 오버라이드(override) 해, 「등가인 오브젝트는 등가인 해시 코드를 보관 유지할 필요가 있다」라고 하는 hashCode 메소드의 범용 규약에 따를 필요가 있는 것에 유의해 주세요.
 
 #### String Class - hashcode method
 
