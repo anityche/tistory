@@ -299,7 +299,7 @@ public class Demo {
 	
 	
 	/*
-	 * 높이만큼 삼각별 출력
+	 * 높이만큼 별 출력
 	 */
 	/*
 	public static void main(String[] args) {
@@ -319,6 +319,28 @@ public class Demo {
 		System.out.println(sb.toString());
 	}
 	*/
+
+	/*
+	 * 높이만큼 별 출력 (역순)
+	 */
+	/*public static void main(String[] args) {
+		int sum = 5;
+		int sumSub = 0;
+		String star = "*";
+		StringBuffer sb = new StringBuffer();
+		
+		for (int i=0; i < sum; i++) {
+			System.out.println("for start...");
+			sumSub = sum-i;
+			while(sumSub != 0){
+				System.out.println("while start...");
+				sb.append(star);
+				sumSub--;
+			}
+			sb.append("\n");
+		}
+		System.out.println(sb.toString());
+	}*/
 	
 	/*
 	 * reverseStr 메소드는 String형 변수 str을 매개변수로 입력받습니다.
