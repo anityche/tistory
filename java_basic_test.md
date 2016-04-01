@@ -286,38 +286,82 @@ str는 영문 대소문자로만 구성되어 있으며, 대문자는 소문자�
 예를들어 str이 "Zbcdefg"면 "gfedcbZ"을 리턴하면 됩니다.
 
  ```java
-public static void main(String[] args) {
-	String str = "Zbcdefg";
-	
-	String newStr = "";
-	char[] charArr = new char[str.length()]; 
-	
-	for (int i=0; i < str.length(); i++) {
-		charArr[i] = str.substring(i, i+1).charAt(0);
-//		System.out.println("charat - "+str.substring(i, i+1).charAt(0));
-	}
-	
-//	java.util.Arrays.sort(charArr); //안먹힘 
-	
-	char[] nArr = new char[str.length()];
-	char temp;
-	for (int j=0; j < charArr.length; j++) {
-		System.out.println(charArr[j] + "******* 비교 시작");
-		for(int i=0; i < charArr.length; i++) {
-			if (0 < String.valueOf(charArr[j]).compareTo(String.valueOf(charArr[i]))) {
-				System.out.println("변경 시작");
-				temp = charArr[j];
-				charArr[j] = charArr[i];
-				charArr[i] = temp;
-				break;
+	public static void main(String[] args) {
+		String str = "AcbdZ";
+//		String newStrLower = "", newStrUpper = "", newStr = "";
+		char[] charLowerArr, charUpperArr, charArr = new char[str.length()]; 
+		int i=0, j=0, l=0, u=0;
+		
+		//문자열을 문자배열객체에 담는다.
+		char c;
+		for (i=0; i < str.length(); i++ ){
+			c = str.substring(i, i+1).charAt(0);
+			charArr[i] = c;
+			if ((int)c < 91 )
+				u++;
+			else 
+				l++;
+		}
+		
+		charUpperArr = new char[u];
+		charLowerArr = new char[l];
+		l=0;
+		u=0;
+		for (i=0; i < str.length(); i++ ){
+			if ((int)charArr[i] < 91 ){
+				charUpperArr[u] = charArr[i];
+				u++;
+			} else { 
+				charLowerArr[l] = charArr[i];
+				l++;
 			}
 		}
-		System.out.println("내부루프 끝");
+		
+//		System.out.println(charUpperArr.length);
+//		System.out.println(charLowerArr.length);
+		
+		
+		char[] n = orderByChar(charLowerArr);
+		char[] nn = orderByChar(charUpperArr);
+		
+		
+		/*for (i = 0; i < charArr.length; i++ ) {
+			c = charArr[i];
+			System.out.println("output : "+i);
+			
+			for (j = (i+1); j < charArr.length; j++ ) {
+				if ((j+1) < charArr.length) {
+					c = compareChar(c, charArr[j]);
+				}
+			}
+			newStrLower += String.valueOf(c);
+			System.out.println(newStrLower);
+		}*/
 	}
-	System.out.println("-------------------------");
 	
-	for (char a : charArr) {
-		System.out.println(a);
+//	public loop
+	public static char[] orderByChar(char[] c){
+		
+		char[] n;
+		int i = 0;
+		for (i; )
+		
+		
+		return new char[1];
 	}
-}
+	
+	public static char compareChar(char a, char b){
+		System.out.println(a + " ASCII : "+ transascii(a) +" vs "+b+" ASCII : " + transascii(b));
+		
+		if ( transascii(a) < transascii(b) ) {
+			System.out.println("return a");
+			return a;
+		} else {
+			System.out.println("return b");
+			return b;
+		}
+	}
+	public static int transascii(char c) {
+		return (int)c;
+	}
 ```
