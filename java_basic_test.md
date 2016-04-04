@@ -276,7 +276,7 @@ public static void main(String[] args) {
 ```
 
 
-**풀었던 문제 중에 아스키코드 값을 사용하지 않고 풀으려다가 삽질 좀 했던 문제 나갑니다.**
+**풀었던 문제 중에 삽질 좀 했던 문제**
 
 
 - 문제
@@ -286,82 +286,142 @@ str는 영문 대소문자로만 구성되어 있으며, 대문자는 소문자�
 예를들어 str이 "Zbcdefg"면 "gfedcbZ"을 리턴하면 됩니다.
 
  ```java
-	public static void main(String[] args) {
-		String str = "AcbdZ";
-//		String newStrLower = "", newStrUpper = "", newStr = "";
-		char[] charLowerArr, charUpperArr, charArr = new char[str.length()]; 
-		int i=0, j=0, l=0, u=0;
-		
-		//문자열을 문자배열객체에 담는다.
-		char c;
-		for (i=0; i < str.length(); i++ ){
-			c = str.substring(i, i+1).charAt(0);
-			charArr[i] = c;
-			if ((int)c < 91 )
-				u++;
-			else 
-				l++;
+public static void main(String[] args) {
+	String str = "AcbduZH", newStr= "";
+	char[] charArr = str.toCharArray(); 
+	
+	int l=0, u=0;
+	char c;
+	for (int i = 0; i < str.length(); i++ ){
+		c = str.substring(i, i+1).charAt(0);
+		charArr[i] = c;
+		if ((int)c < 91 )
+			u++;
+		else 
+			l++;
+	}
+	
+	char[] charUpperArr = new char[u];
+	char[] charLowerArr = new char[l];
+	l = 0;
+	u = 0;
+	for (int i = 0; i < str.length(); i++ ){
+		if ((int)charArr[i] < 91 ){
+			charUpperArr[u] = charArr[i];
+			u++;
+		} else { 
+			charLowerArr[l] = charArr[i];
+			l++;
 		}
+	}
+	
+	String lstr= "", ustr= "";
+	if (charLowerArr.length > 0) {
+		java.util.Arrays.sort(charLowerArr);
+		lstr = String.valueOf(reverseCharArr(charLowerArr));
+	}
+	if (charUpperArr.length > 0) {
+		java.util.Arrays.sort(charUpperArr);
+		ustr = String.valueOf(reverseCharArr(charUpperArr));
+	}
+	
+	newStr = lstr + ustr;
+	//System.out.println("출력 : "+newStr);
+	return newStr;
 		
-		charUpperArr = new char[u];
-		charLowerArr = new char[l];
-		l=0;
-		u=0;
-		for (i=0; i < str.length(); i++ ){
-			if ((int)charArr[i] < 91 ){
-				charUpperArr[u] = charArr[i];
-				u++;
-			} else { 
-				charLowerArr[l] = charArr[i];
-				l++;
+		
+
+	//쉬운방법 1번
+//	char[] charArr = str.toCharArray();
+//	java.util.Arrays.sort(charArr);
+//	for (int i=0; i < charArr.length; i++){
+//		System.out.println(charArr[i]);
+//	}
+
+
+	
+	//쉬운방법 2번
+//	String wordSt = "AcbduZH";
+//    char[] word = wordSt.toCharArray();
+//    for(int i=0;i<(word.length-1);i++){
+//        for(int j=i+1;j>0;j--){
+//        	System.out.println(" i = "+ i);
+//        	System.out.println(" j = "+j);
+//        	
+//        	System.out.println("word[j] = "+word[j]);
+//        	System.out.println("word[j-1] = "+word[j-1]);
+//        	System.out.println("");
+//            if(word[j]<word[j-1]){
+//                char temp=word[j-1];
+//                System.out.println("temp = "+temp);
+//                word[j-1]=word[j];
+//                word[j]=temp;
+//                System.out.println("word[j] = "+word[j]);
+//	        	System.out.println("word[j-1] = "+word[j-1]);
+//	        	System.out.println("");
+//            }
+//        }
+//    }
+//    wordSt=String.valueOf(word);
+//    System.out.println(wordSt);
+		
+}
+
+public static char[] reverseCharArr(char[] ch) {
+	char[] nch = new char[ch.length];
+	int p= 0;
+	for (int i = ch.length-1; i >= 0; i--) {
+		nch[p] = ch[i];
+		p++;
+	}
+	return nch;
+}
+
+
+
+/*
+삽질의 흔적들..
+*/
+public static String orderByChar(char[] arr ){
+//	System.out.println("start orderByChar()...");
+	
+	String ret = "";
+	//2개 이상일때
+	if (arr.length > 2 ){
+		for (int i=0; i < arr.length; i++) {
+			int n = 0;
+			char cn = arr[i];
+//			char temp = arr[i];
+			if ((i+1) < arr.length) {
+				n = getCompareMinChar(cn, arr[i+1]);
+				System.out.println("n 값 : "+ n);
+				
+				cn = arr[i+n];
+				ret += cn;
+				
 			}
 		}
 		
-//		System.out.println(charUpperArr.length);
-//		System.out.println(charLowerArr.length);
-		
-		
-		char[] n = orderByChar(charLowerArr);
-		char[] nn = orderByChar(charUpperArr);
-		
-		
-		/*for (i = 0; i < charArr.length; i++ ) {
-			c = charArr[i];
-			System.out.println("output : "+i);
-			
-			for (j = (i+1); j < charArr.length; j++ ) {
-				if ((j+1) < charArr.length) {
-					c = compareChar(c, charArr[j]);
-				}
-			}
-			newStrLower += String.valueOf(c);
-			System.out.println(newStrLower);
-		}*/
+	} else {
+		ret += String.valueOf(arr[0]);
 	}
 	
-//	public loop
-	public static char[] orderByChar(char[] c){
-		
-		char[] n;
-		int i = 0;
-		for (i; )
-		
-		
-		return new char[1];
-	}
+	System.out.println("return orderByChar() : " + ret);
 	
-	public static char compareChar(char a, char b){
-		System.out.println(a + " ASCII : "+ transascii(a) +" vs "+b+" ASCII : " + transascii(b));
-		
-		if ( transascii(a) < transascii(b) ) {
-			System.out.println("return a");
-			return a;
-		} else {
-			System.out.println("return b");
-			return b;
-		}
-	}
-	public static int transascii(char c) {
-		return (int)c;
-	}
+	return ret;
+}
+
+public static int getCompareMinChar(char a, char b ){
+	System.out.println(a+" 비교 "+b);
+//	int c = 0;
+	if (transascii(a) < transascii(b) || transascii(a) == transascii(b))
+		return 0;
+	else
+		return 1;
+//	return c;
+}
+
+public static int transascii(char c) {
+	return (int)c;
+}
 ```
