@@ -2,6 +2,7 @@
 ### 테스트 문제를 풀어봅시다
 
 - 문제 
+
 int 배열의 수 중 3으로 나누어지는 수를 반환하세요.
 
 ```java
@@ -31,6 +32,7 @@ public static void main(String[] args){
 ```
 
 - 문제 
+
 가운데 글자를 되돌려주는 로직을 완성하세요. 문자열의 갯수가 홀수라면 1글자, 짝수라면 2글자를 
 
 ```java
@@ -49,10 +51,11 @@ public static void main(String[] args){
 ```
 
 - 문제 
-양의 정수 x가 하샤드 수이려면 x의 자릿수의 합으로 x가 나누어져야 합니다. 예를들어 10의 자릿수 합은 1+0이고, 
+
+양의 정수 `x`가 하샤드 수이려면 `x`의 자릿수의 합으로 `x`가 나누어져야 합니다. 예를들어 10의 자릿수 합은 1+0이고, 
 10은 1로 나누어 떨어지므로 10은 하샤드 수입니다.
-isHarshad함수는 양의 정수 num을 매개변수로 입력받습니다. 이 num이 하샤드수인지 아닌지 판단하는 함수를 완성하세요.
-예를들어 num이 10, 12, 18이면 True를 리턴 11, 13이면 False를 리턴하면 됩니다.
+`isHarshad`함수는 양의 정수 `num`을 매개변수로 입력받습니다. 이 `num`이 하샤드수인지 아닌지 판단하는 함수를 완성하세요.
+예를들어 `num`이 10, 12, 18이면 `True`를 리턴 11, 13이면 `False`를 리턴하면 됩니다.
 
 ```java
 public static void main(String[] args){
@@ -102,6 +105,7 @@ public static void main(String[] args) {
 ```
 
 - 문제 
+
 int 배열의 평균을 구하세요.
 
 ```java
@@ -117,6 +121,7 @@ public static void main(String[] args) {
 ```
 
 - 문제 
+
 높이만큼 삼각별 출력
 
 ```java
@@ -139,6 +144,7 @@ public static void main(String[] args) {
 
 
 - 문제
+
 높이만큼 별 출력 (역순)
 
 ```java
@@ -164,10 +170,11 @@ public static void main(String[] args) {
 
 
 - 문제 
-reverseInt 메소드는 int형 n을 매개변수로 입력받습니다.
-n에 나타나는 숫자를 큰것부터 작은 순으로 정렬한 새로운 정수를 리턴해주세요.
-예를들어 n이 118372면 873211을 리턴하면 됩니다.
-n은 양의 정수입니다.
+
+`reverseInt` 메소드는 `int`형 `n`을 매개변수로 입력받습니다.
+`n`에 나타나는 숫자를 큰것부터 작은 순으로 정렬한 새로운 정수를 리턴해주세요.
+예를들어 `n`이 `118372`면 `873211`을 리턴하면 됩니다.
+`n`은 양의 정수입니다.
 
 ```java
 public static void main(String[] args) {		
@@ -198,10 +205,11 @@ public static void main(String[] args) {
 ```
 
 - 문제
-getMinMaxString 메소드는 String형 변수 str을 매개변수로 입력받습니다.
-str에는 공백으로 구분된 숫자들이 저장되어 있습니다.
-str에 나타나는 숫자 중 최소값과 최대값을 찾아 이를 "(최소값) (최대값)"형태의 String을 반환하는 메소드를 완성하세요.
-예를들어 str이 "1 2 3 4"라면 "1 4"를 리턴하고, "-1 -2 -3 -4"라면 "-4 -1"을 리턴하면 됩니다.
+
+`getMinMaxString` 메소드는 `String`형 변수 `str`을 매개변수로 입력받습니다.
+`str`에는 공백으로 구분된 숫자들이 저장되어 있습니다.
+`str`에 나타나는 숫자 중 최소값과 최대값을 찾아 이를 `"(최소값) (최대값)"`형태의 `String`을 반환하는 메소드를 완성하세요.
+예를들어 `str`이 "1 2 3 4"라면 "1 4"를 리턴하고, "-1 -2 -3 -4"라면 "-4 -1"을 리턴하면 됩니다.
 
 ```java
 public static void main(String[] args) {
@@ -235,14 +243,14 @@ public static void main(String[] args) {
 ```
 
 
-**풀었던 문제 중에 삽질 좀 했던 문제**
-
+**문제 중 `sort()` 이용 안하고 해보겠다고 삽질 좀 했던 문제**
 
 - 문제
-reverseStr 메소드는 String형 변수 str을 매개변수로 입력받습니다.
-str에 나타나는 문자를 큰것부터 작은 순으로 정렬해 새로운 String을 리턴해주세요.
-str는 영문 대소문자로만 구성되어 있으며, 대문자는 소문자보다 작은 것으로 간주합니다.
-예를들어 str이 "Zbcdefg"면 "gfedcbZ"을 리턴하면 됩니다.
+
+`reverseStr` 메소드는 `String` 형 변수 `str` 을 매개변수로 입력받습니다.
+`str` 에 나타나는 문자를 큰것부터 작은 순으로 정렬해 새로운 `String` 을 리턴해주세요.
+`str` 는 영문 대소문자로만 구성되어 있으며, 대문자는 소문자보다 작은 것으로 간주합니다.
+예를들어 str이 `"Zbcdefg"`면 `"gfedcbZ"`을 리턴하면 됩니다.
 
  ```java
 public static void main(String[] args) {
@@ -287,19 +295,9 @@ public static void main(String[] args) {
 	newStr = lstr + ustr;
 	//System.out.println("출력 : "+newStr);
 	return newStr;
-		
-		
-
-	//쉬운방법 1번
-//	char[] charArr = str.toCharArray();
-//	java.util.Arrays.sort(charArr);
-//	for (int i=0; i < charArr.length; i++){
-//		System.out.println(charArr[i]);
-//	}
 
 
-	
-	//쉬운방법 2번
+	//쉬운방법 (참고용)
 //	String wordSt = "AcbduZH";
 //    char[] word = wordSt.toCharArray();
 //    for(int i=0;i<(word.length-1);i++){
@@ -339,7 +337,7 @@ public static char[] reverseCharArr(char[] ch) {
 
 
 /*
-삽질의 흔적들..
+삽질의 흔적들.. 더 많지만 지저분해서 날림...
 */
 public static String orderByChar(char[] arr ){
 //	System.out.println("start orderByChar()...");
@@ -383,4 +381,9 @@ public static int getCompareMinChar(char a, char b ){
 public static int transascii(char c) {
 	return (int)c;
 }
-```
+``````
+
+
+`Arrays` 클래스의 `sort()` 가 아닌 직접 구현해보고 싶었는데 아직 알고리즘에 대한 지식이 많이 부족해서 
+단순하게 풀려고 하다보니 더 꼬이고... 헛갈리고...
+
