@@ -126,59 +126,38 @@ public static void main(String[] args) {
 	String star = "*";
 	StringBuffer sb = new StringBuffer();
 	
-<<<<<<< HEAD
-	/*
-	 * 높이만큼 별 출력
-	 */
-	/*
-	public static void main(String[] args) {
-		
-		int sum = 8, sumSub = 0;
-		String star = "*";
-		StringBuffer sb = new StringBuffer();
-		
-		for (int i=0; i < sum; i++) {
-			sumSub = (i+1);
-			while (sumSub > 0) {
-				sb.append(star);
-				sumSub--;
-			}
-			sb.append("\n");
-=======
 	for (int i=0; i < sum; i++) {
 		sumSub = (i+1);
 		while (sumSub > 0) {
 			sb.append(star);
 			sumSub--;
->>>>>>> 6316fff1f4f02aab6a8192dca119137aeb29b3d1
 		}
 		sb.append("\n");
 	}
-<<<<<<< HEAD
-	*/
+}
+```
 
-	/*
-	 * 높이만큼 별 출력 (역순)
-	 */
-	/*public static void main(String[] args) {
-		int sum = 5;
-		int sumSub = 0;
-		String star = "*";
-		StringBuffer sb = new StringBuffer();
-		
-		for (int i=0; i < sum; i++) {
-			System.out.println("for start...");
-			sumSub = sum-i;
-			while(sumSub != 0){
-				System.out.println("while start...");
-				sb.append(star);
-				sumSub--;
-			}
-			sb.append("\n");
+
+- 문제
+높이만큼 별 출력 (역순)
+
+```java
+public static void main(String[] args) {
+	int sum = 5;
+	int sumSub = 0;
+	String star = "*";
+	StringBuffer sb = new StringBuffer();
+	
+	for (int i=0; i < sum; i++) {
+		System.out.println("for start...");
+		sumSub = sum-i;
+		while(sumSub != 0){
+			System.out.println("while start...");
+			sb.append(star);
+			sumSub--;
 		}
-		System.out.println(sb.toString());
-	}*/
-=======
+		sb.append("\n");
+	}
 	System.out.println(sb.toString());
 }
 ```
@@ -195,46 +174,26 @@ public static void main(String[] args) {
 	int n = 118372;
 	String nStr = Integer.toString(n);
 	int[] arr = new int[nStr.length()];
->>>>>>> 6316fff1f4f02aab6a8192dca119137aeb29b3d1
 	
 	for (int i=0; i < arr.length; i++) {
 		nStr.substring(i, i+1);
 		arr[i] = Integer.parseInt(nStr.substring(i, i+1));
-//		System.out.println(nStr.substring(i, i+1));
 	}
 	
 	Arrays.sort(arr); //112378
-	System.out.println("--------------------");
-    for (int val : arr) {
-    	System.out.println(val);
-    }
-    
+		    
 	int temp;
-    for (int i = 0; i < arr.length / 2; i++) {
-    	System.out.println(i);
-    	
+	for (int i = 0; i < arr.length / 2; i++) {
 		temp = arr[i];
-		System.out.println("temp - "+temp);
-		  
 		arr[i] = arr[(arr.length - 1) - i];
-		System.out.println("arr[i] - "+arr[i]);
-		  
 		arr[(arr.length - 1) - i] = temp;
-    }
+	}
     
-    System.out.println("--------------------");
-    for (int val : arr) {
-    	System.out.println(val);
-    }
-    
-    String ret="";
-    for (int val : arr) {
-	    //System.out.println(val);
-      ret += Integer.toString(val);
-    }
-    
-    System.out.println(ret);
-	
+	String ret="";
+	for (int val : arr) {
+		ret += Integer.toString(val);
+	}
+	System.out.println(ret);
 }
 ```
 
