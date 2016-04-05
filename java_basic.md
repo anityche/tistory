@@ -140,7 +140,6 @@ public static void main(String[] args) {
 
 
 ```java
-
 int month = Calendar.getInstance().get(Calendar.MONTH) + 1;
 String season = "";
 
@@ -191,4 +190,90 @@ for (x in iArr) {
     ...
 }
 ```
+
+#### 생성자 
+
+모든 클래스는 생성자라는 메소드와 비슷한 멤버를 가진다고 하는데 몇 가지 특성이 있다. 
+
+- 리턴타입이 없다.
+- 클래스 명과 동일한 명을 가진다.
+- 명시적 선언을 하지 않아도 컴파일시 자동으로 만들어진다.
+- 명시적 선언을 한다면 컴파일시 자동으로 만들어지지 않는다.
+- 인수를 가질 수 있다.
+- 메소드와 마찬가지로 오버로딩이 가능하다.
+
+일반적으로 알고들 있는 내용인데(거짓말!) 기본 생성자 이외에 반드시 초기값이 선언되어야 할드 필드가 있다면 
+사용시 오버로딩 하면서 `this` 키워드를 이용하여 좀 더 간략한 
+코드를 만들 수 있다. 
+
+```java
+public class Car {
+    String name;
+    int number;
+
+    public Car(){
+        this("", 0);
+    }
+    public Car(String name) {
+        this(name, 0);
+    }
+    public Car(int number) {
+        this("", number);
+    }
+    public Car(String name, int number) {
+        this.name = name;
+        this.number = number;
+    }
+}
+```
+
+그럼 기본적으로 컴파일시 
+
+
+#### 오토박싱
+
+기본 타입 데이터를 객체 타입의 데이터로 자동 형변환 시켜주는 기능.
+
+```java
+int i = 5;  //기본타입
+Integer i2 = new Integer(5);    //객체 타입 (본래 인스턴스화 시켜서 사용했으나 아래와 같이 사용할 수 있음)
+
+Integer i3 = 5; //오토박싱 (자동 형변환)
+//실제 컴파일시 new Integer(5); 라고 자동으로 변환한다.
+
+int i4 = i3.intValue();
+int i5 = i3;    //오토언박싱 
+```
+
+> JAVA 1.5 이후 부터 가능
+
+- [Integer Class](https://docs.oracle.com/javase/7/docs/api/java/lang/Integer.html "Integer")
+
+
+#### 반복문 안에서의 String 연산
+
+```java
+String str = "";
+for (int i=0; i < 1000; i++) {
+    str = str + "*";
+}
+//위와 같은 String `+` 연산 코드는 실제로 컴파일시 String 객체를 1000번 생성한다. (성능 다운)
+
+StringBuffer sb = new StringBuffer();
+for (int i=0; i < 1000; i++) {
+    sb.append("*");
+}
+//그래서 위와 같은 메소드체이닝 방식을 사용하는 StringBuffer 클래스를 이용하는 것이 좋다.
+```
+
+>method chaining - 자신을 리턴하며 메소드를 이어가는.. `sb.append().append().append().toString()`
+
+
+#### 필수 패키지
+
+자바에서 가장 기본이자, 가장 많이 사용 되는 패키지
+
+- java.lang
+- java.util
+
 
