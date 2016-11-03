@@ -1,5 +1,5 @@
 
-### 윈도우, 지킬, 깃헙
+## 윈도우, 지킬, 깃헙
 
 일전에 깃헙에 블로그를 편하게 만들 수 있다는 방법이 있어서 테스트 하다가 이해력이 부족해서 환경설정 문서만 보는데서 그쳤었다.
 짬이 난 김에 마무리까지 한 번 해보려고 기록을 남긴다.
@@ -7,33 +7,115 @@
 > 윈도우 10 64비트를 기준으로 작성한다. 
 > github 계정이 있다는 전제조건 하에 진행한다.
 
-#### Ruby 설치 및 설정
+### Ruby 설치 및 설정 (Bundler 포함)
 
 - [ruby(2.x 버전이 안정적이라고 한다), rubydevkit을 다운로드](http://rubyinstaller.org/downloads/archives)
 - ruby 설치(설치시 체크 항목이 3개 있는데, *path* 자동등록은 꼭 해주도록 하자)
-- `cmd` 커맨드 모드에서 devkit 설치 폴더로 이동
-    - `ruby dk.rb init` 명령어 실행 
-    - `ruby dk.rb install` 명령어 실행 
+- devkit 폴더 압축해제 후 루트 폴더로 이동 
+- `_config.yml` 파일 편집
+    + `--- [루비설치폴더지정]`
+- `cmd` 커맨드 모드
+    - `cd [devkit 루트폴더]` 이동
+    - `ruby dk.rb init` 명령어 실행 (초기화)
+    - `ruby dk.rb install` 명령어 실행  (개발킷과 바인딩)
 
-
-#### Bundler 설치 및 설정
-
-ruby의 package manager 라고 한다. ruby를 설치 했다면 `gem` 명령어로 이어서 설치를 진행.
-
+<상기진행과정>
 ```
-C:\RubyDevKit>gem install bundler
+C:\dev\Ruby22-x64> cd..
+C:\dev> cd .\RubyDevKit
+C:\dev\RubyDevKit> ruby dk.rb init
+
+Initialization complete! Please review and modify the auto-generated
+'config.yml' file to ensure it contains the root directories to all
+of the installed Rubies you want enhanced by the DevKit.
+
+C:\dev\RubyDevKit> ruby  dk.rb install
+C:\dev\RubyDevKit> gem install bundler -- 해당 오류는 하단에 별도 참조
 
 ERROR:  Could not find a valid gem 'bundler' (>= 0), here is why:
           Unable to download data from https://rubygems.org/ - SSL_connect returned=1 errno=0 state=SSLv3 read server certificate B: certificate verify failed (https://api.rubygems.org/specs.4.8.gz)
+
+C:\dev\RubyDevKit> gem install bundler
+
+Fetching: bundler-1.13.6.gem (100%)
+Successfully installed bundler-1.13.6
+Parsing documentation for bundler-1.13.6
+Installing ri documentation for bundler-1.13.6
+Done installing documentation for bundler after 17 seconds
+1 gem installed
 ```
 
-##### Error - gem install bundler 
+#### Error - gem install bundler 
 
-설치시 오류가 발생했다. 자격이 없다고 하는건가?
+설치시 오류가 발생했다. 뭐시기 뭐시기 자격이 없다고 하는건가? 내용인즉, 새로운 암호화 권한 파일을 바꿔치기 해라. 정도인 것 같다. 
+밝히지만 영어 난독증이라..
 
-- [ssl-certificate update guides](http://guides.rubygems.org/ssl-certificate-update/)
+- [ssl-certificate update guides 참조](http://guides.rubygems.org/ssl-certificate-update/#manual-solution-to-ssl-issue)
 
-친절하다. 가이드 페이지 방문했더니 루비잼을 업데이트 하란다.
+1. `\루비설치폴더\lib\ruby\2.2.0\rubygems\ssl_certs` 폴더로 이동
+1. AddTrustExternalCARoot.pem 파일을 열어서 내용을 [GlobalSignRootCA.pem](https://raw.githubusercontent.com/rubygems/rubygems/master/lib/rubygems/ssl_certs/index.rubygems.org/GlobalSignRootCA.pem) 파일의 내용과 바꿔치기
+
+> GlobalSignRootCA.pem 파일의 내용은 작성일자 기준 내용이므로 직접 다운로드 받거나 내용을 확인하시길
+
+그리고 나서 다시 bundler 설치... 
+
+```
+C:\dev\Ruby22-x64> gem install bundler
+
+Fetching: bundler-1.13.6.gem (100%)
+...(생략)
+Done installing documentation for bundler after 17 seconds
+1 gem installed
+```
+
+
+### Jekyll 설치 및 설정
+
+- github에서 사용할 테마 선정([테마다운로드](http://jekyllthemes.org/))
+- 다운로드 받은 압축파일을 자신이 사용할 github page site 명으로 수정 ([GitHub Pages](https://pages.github.com/))
+
+
+#### 블로그에 필요한 gem 설치
+
+- 블로그 폴더로 이동 
+- `bundle` or `bundle install` 명령어
+
+```
+C:\git\anityche.github.io>bundle 
+
+Fetching gem metadata from https://rubygems.org/..............
+...(생략)
+Using bundler 1.13.6
+Gem::InstallError: The 'RedCloth' native gem requires installed build tools.
+
+Please update your PATH to include build tools or download the DevKit
+from 'http://rubyinstaller.org/downloads' and follow the instructions
+at 'http://github.com/oneclick/rubyinstaller/wiki/Development-Kit'
+
+An error occurred while installing RedCloth (4.2.9), and Bundler cannot
+continue.
+Make sure that `gem install RedCloth -v '4.2.9'` succeeds before bundling.
+```
+
+
+#### 
+
+
+
+- 참조블로그
+    + [http://hochulshin.com/how-to-use-jekyll-on-github-1/](http://hochulshin.com/how-to-use-jekyll-on-github-1/)
+    + [http://tech.whatap.io/2015/09/11/install-jekyll-on-windows/](http://tech.whatap.io/2015/09/11/install-jekyll-on-windows/)
+
+
+
+
+
+
+
+
+
+
+
 
 > 해당 글 작성일 기준으로 가이드에서는 gem 버전이 2.6.7 이었고 최신은 [2.6.8](https://rubygems.org/gems/rubygems-update-2.6.8.gem) 이었다.
 
@@ -77,32 +159,6 @@ WARNING:  Unable to pull data from 'https://rubygems.org/': SSL_connect returned
 1 gem installed
 ```
 
-후후. 그리고 다시 bundler 설치 진행.
-
-그런데 똑같은 오류!!! 아.. 어쩐지 위에 **WARNING** 문구가 마음 한 켠에 걸리더라!!!
-
-그래서 다시 가이드 페이지로 직행.
-
-- [MANUAL SOLUTION TO SSL ISSUE](http://guides.rubygems.org/ssl-certificate-update/#manual-solution-to-ssl-issue)
-
-내용인즉, 새로운 암호화 권한 파일을 바꿔치기 해라. 정도인 것 같다. 다시 밝히지만 영어 난독증이라..
-
-1. `\Ruby22-x64\lib\ruby\2.2.0\rubygems\ssl_certs` 폴더로 이동
-1. AddTrustExternalCARoot.pem 파일을 열어서 내용을 [GlobalSignRootCA.pem](https://raw.githubusercontent.com/rubygems/rubygems/master/lib/rubygems/ssl_certs/index.rubygems.org/GlobalSignRootCA.pem) 파일의 내용과 바꿔치기
-
-> GlobalSignRootCA.pem 파일의 내용은 작성일자 기준 내용이므로 직접 다운로드 받거나 내용을 확인하시길
-
-
-그리고 나서 다시 bundler 설치... 이번에는 되겠지...
-
-```
-c:\Ruby22-x64>gem install bundler
-
-Fetching: bundler-1.13.6.gem (100%)
-...(생략)
-Done installing documentation for bundler after 17 seconds
-1 gem installed
-```
 
 후후.
 
@@ -208,12 +264,3 @@ Done installing documentation for test-unit after 1 seconds
 Gems updated: bigdecimal io-console json minitest power_assert psych rake rdoc test-unit
 ```
 
-
-#### Jekyll 설치 및 설정
-
-- github에서 사용할 테마 선정([테마다운로드](http://jekyllthemes.org/))
-- 다운로드 받은 압축파일을 자신이 사용할 github page site 명으로 수정 ([GitHub Pages](https://pages.github.com/))
-
-
-- 참조블로그
-    + [http://hochulshin.com/how-to-use-jekyll-on-github-1/](http://hochulshin.com/how-to-use-jekyll-on-github-1/)
